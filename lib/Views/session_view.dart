@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:serangym/Models/exercise.dart';
 import 'package:serangym/Models/session.dart';
+import 'package:serangym/Views/select_exercise_view.dart';
 
 class SessionView extends StatefulWidget {
   Session? session;
@@ -26,20 +27,27 @@ class _SessionViewState extends State<SessionView> {
           var exercise = session.exercises[index];
           return ListTile(
             leading: const Icon(Icons.list),
-            title: Text(exercise),
+            title: Text(exercise.name),
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: test,
+        onPressed: _showExerciseList,
         child: const Icon(Icons.add),
       ),
     );
   }
 
-  void test() {
+  void _showExerciseList() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SelectExerciseView(addExercise)),
+    );
+  }
+
+  void addExercise(Exercise e) {
     setState(() {
-      session.exercises.add("Guarraaa");
+      session.exercises.add(e);
     });
   }
 }
