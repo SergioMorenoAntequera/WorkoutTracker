@@ -1,8 +1,9 @@
+import 'package:serangym/Models/Model.dart';
 import 'package:serangym/Models/exercise.dart';
 
-class Session {
-  var start = DateTime(2021);
-  var end = DateTime(2021);
+class Session extends Model {
+  var start = DateTime.now();
+  var end = DateTime.now();
 
   var exercises = [];
 }

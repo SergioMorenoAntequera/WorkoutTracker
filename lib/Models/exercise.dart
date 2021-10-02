@@ -1,15 +1,27 @@
-class Exercise {
-  var start = DateTime(2021);
-  var end = DateTime(2021);
+import 'package:serangym/Models/Model.dart';
+
+class Exercise extends Model {
+  var start = DateTime.now();
+  var end = DateTime.now();
   var duration = 0; // Millis
 
   var name = "";
-  var type = 0;
-  var muscles = 0;
-  var participants = "";
-  var description = "";
+  var sets = [];
 
   Exercise(name) {
     this.name = name;
+  }
+
+  void addSet(reps) {
+    sets.add(new Set(reps));
+  }
+}
+
+class Set {
+  var start = DateTime.now();
+  var end = DateTime.now();
+  var reps = "";
+  Set(reps) {
+    this.reps = reps;
   }
 }

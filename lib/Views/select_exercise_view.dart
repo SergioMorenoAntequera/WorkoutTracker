@@ -8,7 +8,6 @@ class SelectExerciseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var availableExercises = [
-      Exercise("Rest"),
       Exercise("1 leg 6 directions"),
       Exercise("Inclined push ups"),
       Exercise("Push ups"),
