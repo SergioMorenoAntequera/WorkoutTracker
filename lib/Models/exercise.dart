@@ -19,8 +19,9 @@ class Exercise extends Model {
 
 class Set {
   var start = DateTime.now();
-  var end = DateTime.now();
+  var end = null;
   var reps = "";
+
   Set(reps) {
     this.reps = reps;
   }

@@ -31,8 +31,8 @@ class _SessionViewState extends State<SessionView> {
             itemBuilder: (BuildContext context, int index) {
               return ExerciseCard(
                 session.exercises[index],
-                addExercise,
                 deleteExercise,
+                addSetDialog,
               );
             },
           ),
@@ -54,6 +54,12 @@ class _SessionViewState extends State<SessionView> {
   }
 
   void _showExerciseList() {
+    void addExercise(Exercise e) {
+      setState(() {
+        session.exercises.add(e);
+      });
+    }
+
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SelectExerciseView(addExercise)),
@@ -66,16 +72,40 @@ class _SessionViewState extends State<SessionView> {
     });
   }
 
-  void addExercise(Exercise e) {
-    setState(() {
-      session.exercises.add(e);
-    });
-  }
+  // methods for the exercise list
 
+  // Methods for exercise card
   void deleteExercise(Exercise e) {
     setState(() {
       var del = session.exercises.firstWhere((element) => element.id == e.id);
       session.exercises.remove(del);
     });
+  }
+
+  void _addSet(Exercise e, int reps) {
+    setState(() {
+      e.addSet(reps);
+    });
+  }
+
+  void addSetDialog(e, reps) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Alert Dialog title"),
+          content: const Text("Alert Dialog body"),
+          actions: <Widget>[
+            TextButton(
+              child: const Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _addSet(e, reps);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
