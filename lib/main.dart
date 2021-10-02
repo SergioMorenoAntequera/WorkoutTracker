@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:serangym/Models/session.dart';
+import 'package:serangym/Views/session_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,12 +34,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,10 +55,20 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _createSession,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  void _createSession() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SessionView(null)),
+    );
+    setState(() {
+      _counter++;
+    });
   }
 }
