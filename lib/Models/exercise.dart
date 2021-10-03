@@ -6,7 +6,7 @@ class Exercise extends Model {
   var duration = 0; // Millis
 
   var name = "";
-  var sets = [];
+  var sets = <Set>[];
 
   Exercise(name) {
     this.name = name;

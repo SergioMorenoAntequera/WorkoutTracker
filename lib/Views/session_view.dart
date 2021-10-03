@@ -32,7 +32,7 @@ class _SessionViewState extends State<SessionView> {
               return ExerciseCard(
                 session.exercises[index],
                 deleteExercise,
-                addSetDialog,
+                addSet,
               );
             },
           ),
@@ -82,30 +82,9 @@ class _SessionViewState extends State<SessionView> {
     });
   }
 
-  void _addSet(Exercise e, int reps) {
+  void addSet(Exercise e, String reps) {
     setState(() {
       e.addSet(reps);
     });
-  }
-
-  void addSetDialog(e, reps) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Alert Dialog title"),
-          content: const Text("Alert Dialog body"),
-          actions: <Widget>[
-            TextButton(
-              child: const Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-                _addSet(e, reps);
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 }

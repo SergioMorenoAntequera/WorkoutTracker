@@ -5,5 +5,5 @@ class Session extends Model {
   var start = DateTime.now();
   var end = DateTime.now();
 
-  var exercises = [];
+  var exercises = <Exercise>[];
 }
