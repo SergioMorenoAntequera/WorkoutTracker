@@ -1,4 +1,4 @@
-import 'package:serangym/Models/Model.dart';
+import 'package:serangym/Models/model.dart';
 
 class Exercise extends Model {
   var start = null;

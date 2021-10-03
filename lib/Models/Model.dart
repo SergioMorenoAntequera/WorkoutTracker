@@ -1,5 +1,11 @@
 import 'package:uuid/uuid.dart';
 
 abstract class Model {
-  String id = Uuid().v1();
+  String id = const Uuid().v1();
+
+  dynamic clone() {
+    var cloned = this;
+    cloned.id = const Uuid().v1();
+    return cloned;
+  }
 }

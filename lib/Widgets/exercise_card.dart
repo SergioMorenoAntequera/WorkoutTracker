@@ -74,10 +74,13 @@ class ExerciseCard extends StatelessWidget {
                           : Container(),
                   const SizedBox(width: 10),
                   exercise.start != null && exercise.end == null
-                      ? ElevatedButton(
-                          child: const Text("Add Set"),
-                          onPressed: () =>
-                              {showAddSetDialog(context, exercise)},
+                      ? Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: ElevatedButton(
+                            child: const Text("Add Set"),
+                            onPressed: () =>
+                                {showAddSetDialog(context, exercise)},
+                          ),
                         )
                       : Container(),
                 ],

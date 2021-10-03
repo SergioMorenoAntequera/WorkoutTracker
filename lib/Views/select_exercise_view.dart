@@ -7,7 +7,8 @@ class SelectExerciseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var availableExercises = [
+    var availableExercises = <Exercise>[
+      Exercise("Break"),
       Exercise("1 leg 6 directions"),
       Exercise("Inclined push ups"),
       Exercise("Push ups"),
@@ -28,8 +29,11 @@ class SelectExerciseView extends StatelessWidget {
             leading: const Icon(Icons.list),
             title: Text(exercise.name),
             onTap: () => {
-              addExercise(availableExercises[index]),
-              Navigator.pop(context),
+              ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+              addExercise(availableExercises[index].clone()),
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(exercise.name + " Added")),
+              )
             },
           );
         },
