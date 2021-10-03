@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:serangym/Models/session.dart';
 import 'package:serangym/Views/session_view.dart';
 
 void main() {

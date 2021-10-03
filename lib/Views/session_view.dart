@@ -55,7 +55,17 @@ class _SessionViewState extends State<SessionView> {
             ),
             bottom: 20,
             left: 10,
-          )
+          ),
+          Positioned(
+            child: ElevatedButton(
+              child: const Text('Finish Session'),
+              onPressed: () {
+                session.test();
+              },
+            ),
+            bottom: 20,
+            left: 130,
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
