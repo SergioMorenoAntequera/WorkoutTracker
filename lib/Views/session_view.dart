@@ -22,17 +22,29 @@ class _SessionViewState extends State<SessionView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Nueva Session"),
+        title: const Text("New Session"),
       ),
       body: Stack(
         children: [
-          ListView.builder(
+          ReorderableListView.builder(
+            onReorder: (int oldIndex, int newIndex) {
+              setState(() {
+                if (oldIndex < newIndex) {
+                  newIndex -= 1;
+                }
+                final Exercise item = session.exercises.removeAt(oldIndex);
+                session.exercises.insert(newIndex, item);
+              });
+            },
             itemCount: session.exercises.length,
             itemBuilder: (BuildContext context, int index) {
               return ExerciseCard(
                 session.exercises[index],
                 deleteExercise,
+                startExercise,
+                finishExercise,
                 addSet,
+                key: Key('$index'),
               );
             },
           ),
@@ -85,6 +97,18 @@ class _SessionViewState extends State<SessionView> {
   void addSet(Exercise e, String reps) {
     setState(() {
       e.addSet(reps);
+    });
+  }
+
+  void startExercise(Exercise e) {
+    setState(() {
+      e.start = DateTime.now();
+    });
+  }
+
+  void finishExercise(Exercise e) {
+    setState(() {
+      e.end = DateTime.now();
     });
   }
 }

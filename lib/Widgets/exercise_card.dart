@@ -4,43 +4,102 @@ import 'package:serangym/Models/exercise.dart';
 class ExerciseCard extends StatelessWidget {
   Exercise exercise;
   Function deleteExercise;
+  Function startExercise;
+  Function finishExercise;
   Function addSet;
-  ExerciseCard(this.exercise, this.deleteExercise, this.addSet, {Key? key})
+  ExerciseCard(this.exercise, this.deleteExercise, this.startExercise,
+      this.finishExercise, this.addSet,
+      {Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Column(
       children: [
-        Flexible(
-          flex: 1,
-          child: TextButton(
-            onPressed: () => {deleteExercise(exercise)},
-            child: const Icon(Icons.delete),
-          ),
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                // Trash
+                TextButton(
+                  onPressed: () => {deleteExercise(exercise)},
+                  child: const Icon(Icons.delete),
+                ),
+                // Name
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(exercise.name),
+                    Row(
+                      children: [
+                        exercise.start != null
+                            ? Text(
+                                exercise.start.hour.toString() +
+                                    ":" +
+                                    exercise.start.minute.toString(),
+                              )
+                            : Container(),
+                        exercise.end != null
+                            ? Text(
+                                " - " +
+                                    exercise.end.hour.toString() +
+                                    ":" +
+                                    exercise.end.minute.toString(),
+                              )
+                            : Container()
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+
+            // Add Set and Done
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Row(
+                children: [
+                  exercise.start == null
+                      ? ElevatedButton(
+                          child: const Text("Start"),
+                          onPressed: () => {startExercise(exercise)},
+                        )
+                      : exercise.end == null
+                          ? ElevatedButton(
+                              child: const Text("Done"),
+                              onPressed: () => {finishExercise(exercise)},
+                            )
+                          : Container(),
+                  const SizedBox(width: 10),
+                  exercise.start != null && exercise.end == null
+                      ? ElevatedButton(
+                          child: const Text("Add Set"),
+                          onPressed: () =>
+                              {showAddSetDialog(context, exercise)},
+                        )
+                      : Container(),
+                ],
+              ),
+            ),
+          ],
         ),
-        Flexible(
-          flex: 2,
-          child: Text(exercise.name),
-        ),
-        Flexible(
-          flex: 2,
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: const ScrollPhysics(),
-            itemCount: exercise.sets.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Text(exercise.sets[index].reps);
-            },
-          ),
-        ),
-        Flexible(
-          flex: 2,
-          child: ElevatedButton(
-              child: const Text("Add Set"),
-              onPressed: () => {showAddSetDialog(context, exercise)}),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: const ScrollPhysics(),
+          itemCount: exercise.sets.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              padding: const EdgeInsets.only(left: 25),
+              child: Text(
+                "Set " +
+                    (index + 1).toString() +
+                    ": " +
+                    exercise.sets[index].reps,
+              ),
+            );
+          },
         ),
       ],
     );
