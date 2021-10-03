@@ -1,4 +1,4 @@
-import 'package:serangym/Models/Model.dart';
+import 'package:serangym/Models/model.dart';
 import 'package:serangym/Models/exercise.dart';
 
 class Session extends Model {
