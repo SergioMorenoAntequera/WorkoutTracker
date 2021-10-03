@@ -60,7 +60,8 @@ class _SessionViewState extends State<SessionView> {
             child: ElevatedButton(
               child: const Text('Finish Session'),
               onPressed: () {
-                session.test();
+                session.save();
+                print("a");
               },
             ),
             bottom: 20,
