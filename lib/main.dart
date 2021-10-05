@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:serangym/Views/session_view.dart';
-import 'package:serangym/models/model.dart';
 
 void main() {
-  Model.initializeDB(["sessions"]);
   runApp(const MyApp());
 }
 
