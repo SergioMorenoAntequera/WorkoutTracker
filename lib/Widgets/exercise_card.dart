@@ -36,17 +36,17 @@ class ExerciseCard extends StatelessWidget {
                       children: [
                         exercise.start != null
                             ? Text(
-                                exercise.start.hour.toString() +
+                                exercise.start!.hour.toString() +
                                     ":" +
-                                    exercise.start.minute.toString(),
+                                    exercise.start!.minute.toString(),
                               )
                             : Container(),
                         exercise.end != null
                             ? Text(
                                 " - " +
-                                    exercise.end.hour.toString() +
+                                    exercise.end!.hour.toString() +
                                     ":" +
-                                    exercise.end.minute.toString(),
+                                    exercise.end!.minute.toString(),
                               )
                             : Container()
                       ],

@@ -6,18 +6,26 @@ class Session extends Pra {
   @override
   var table = "sessions";
 
-  var start = DateTime.now();
-  var end = DateTime.now();
-  var exercises = <Exercise>[];
+  DateTime start = DateTime.now();
+  DateTime? end;
+  List<Exercise> exercises = <Exercise>[];
 
   @override
   Map<String, dynamic> toFirebase() {
     var firebase = super.toFirebase();
     firebase.addAll({
-      'id': id,
       'start': start,
       'end': end,
     });
     return firebase;
+  }
+
+  @override
+  void save(cb, error) {
+    end = DateTime.now();
+    for (var exer in exercises) {
+      exer.save(null, null);
+    }
+    super.save(cb, error);
   }
 }
