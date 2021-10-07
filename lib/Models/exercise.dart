@@ -1,6 +1,6 @@
-import 'package:serangym/Models/model.dart';
+import 'package:serangym/models/pra.dart';
 
-class Exercise extends Model {
+class Exercise extends Pra {
   var start = null;
   var end = null;
   var duration = 0; // Millis

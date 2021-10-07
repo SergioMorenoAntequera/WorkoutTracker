@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:serangym/Views/session_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(const MyApp());
+  Firebase.initializeApp();
 }
 
 class MyApp extends StatelessWidget {
@@ -40,18 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+        child: ElevatedButton(onPressed: signIn, child: const Text("as")),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _createSession,
@@ -59,6 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  void signIn() async {
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInAnonymously();
   }
 
   void _createSession() {
